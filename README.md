@@ -1,5 +1,6 @@
 implemented by using TDD with JUnit and Hamcrest
 
+this branch is using more OOP concepts
 ---
 
 This Kata goal is to implement a simple tennis score computer.
@@ -40,6 +41,6 @@ For example the following input “ABABAA” should print :
 
 “Player A : 30 / Player B : 30”
 
-“Player A : 40 / Player B : 30”
+“Player A : 40  / Player B : 30”
 
 “Player A wins the game

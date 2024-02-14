@@ -1,5 +1,8 @@
 implemented by using TDD with JUnit and Hamcrest
 
+There's another branch called 'second-approach', where I attempted to 
+utilize more OOP concepts, although it remains a relatively simple program.
+
 ---
 
 This Kata goal is to implement a simple tennis score computer.

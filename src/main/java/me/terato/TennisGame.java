@@ -2,7 +2,9 @@ package me.terato;
 
 public class TennisGame {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        var tennisGame = new TennisGame();
+
+        tennisGame.play("ABABAB");
     }
 
     public String play(String input) {
@@ -16,7 +18,8 @@ public class TennisGame {
                 player2++;
             }
 
-            System.out.printf("Player A - %d / Player B - %d%n", calculateWonPoints(player1), calculateWonPoints(player2));
+            if(player1 <= 3 && player2 <= 3)
+                System.out.printf("Player A : %d / Player B : %d%n", calculateWonPoints(player1), calculateWonPoints(player2));
 
             if (player1 >= 3 && player2 >= 3 && Math.abs(player1 - player2) == 1) {
                 if (player1 > player2) {
@@ -30,9 +33,11 @@ public class TennisGame {
         if (player1 > player2) {
             System.out.println("Player A wins the game!");
             return "A";
-        } else {
+        } else if (player2 > player1){
             System.out.println("Player B wins the game!");
             return "B";
+        } else {
+            throw new RuntimeException("Invalid game, no winners!");
         }
     }
 

@@ -43,4 +43,12 @@ public class TestTennisGame {
         }
     }
 
+    @Test()
+    public void testInvalidGame() {
+        TennisGame game = new TennisGame();
+
+        assertThrows(RuntimeException.class, () -> {
+            game.play("ABABAB");
+        }, "Invalid game should throw RuntimeException");
+    }
 }

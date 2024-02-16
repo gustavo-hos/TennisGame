@@ -1,8 +1,9 @@
 package me.terato.tennis_game.score.display;
 
-import static me.terato.tennis_game.PointCallConverter.convertFromScore;
 import me.terato.tennis_game.score.PlayerScore;
 import me.terato.tennis_game.score.ScoreSystem;
+
+import static me.terato.tennis_game.PointCallConverter.convertFromScore;
 
 public class StdOutScoreDisplay implements ScoreDisplay {
 

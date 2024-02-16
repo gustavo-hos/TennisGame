@@ -1,5 +1,4 @@
-This is an implementation of Tennis Kata, in which the mains goal remains in creating a 
-score system for a tennis game. 
+This is an implementation of the Tennis Kata, with the main goal being the creation of a scoring system for a tennis game.
 
 ### Rules details:
 

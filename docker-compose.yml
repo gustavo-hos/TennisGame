@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  gradle:
+    image: gradle:latest
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: "gradle clean build"
+    environment:
+      - GRADLE_USER_HOME=/usr/src/app/.gradle
+
+  openjdk:
+    image: openjdk:latest
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: "java -jar ./build/libs/tennis-game-1.0.jar"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - gradle

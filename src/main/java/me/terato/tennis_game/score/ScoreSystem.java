@@ -8,29 +8,42 @@ public record ScoreSystem(PlayerScore playerOne, PlayerScore playerTwo) {
     private static final int POINTS_TO_WIN = 4;
 
     public void winPoint(String player) {
-        updatePlayersScore(player);
-        handleAdvantage();
+        var pAdvantage = checkAdvantage();
+
+        if (this.playerOne.getPlayer().equals(player)) {
+            this.playerOne.increaseScore();
+
+            if (pAdvantage != null && pAdvantage.equals(playerTwo().getPlayer()) && playerTwo().getScore() > POINTS_TO_DEUCE)
+                playerTwo.decreaseScore();
+
+        } else {
+            this.playerTwo.increaseScore();
+
+            if (pAdvantage != null && pAdvantage.equals(playerOne().getPlayer()) && playerOne().getScore() > POINTS_TO_DEUCE)
+                playerOne.decreaseScore();
+        }
     }
 
     public boolean isDeuce() {
-        int serverScore = playerOne().getScore();
-        int receiverScore = playerTwo().getScore();
+        int p1 = playerOne().getScore();
+        int p2 = playerTwo().getScore();
 
-        return serverScore == POINTS_TO_DEUCE && serverScore == receiverScore;
+        return p1 >= POINTS_TO_DEUCE && p1 == p2;
     }
 
     public String checkAdvantage() {
-        return isDeuce() ? checkScore(ADVANTAGE_DIFFERENCE) : null; // To be in advantage, only a one-point difference is necessary.
+        return checkScore(ADVANTAGE_DIFFERENCE);
     }
 
     public String checkWinner() {
-        if(isDeuce())
-            return checkScore(WINNER_DIFFERENCE); // To be the winner, only a two-point difference is necessary, in case of deuce.
+        if(playerOne().getScore() >= POINTS_TO_DEUCE && playerTwo().getScore() >= POINTS_TO_DEUCE)
+            return checkScore(WINNER_DIFFERENCE);
 
-        if(playerOne().getScore() == POINTS_TO_WIN)
+        if (playerOne().getScore() == POINTS_TO_WIN && playerTwo().getScore() < POINTS_TO_DEUCE) {
             return playerOne().getPlayer();
-        else if(playerTwo().getScore() == POINTS_TO_WIN)
+        } else if (playerTwo().getScore() == POINTS_TO_WIN && playerOne().getScore() < POINTS_TO_DEUCE) {
             return playerTwo().getPlayer();
+        }
 
         return null;
     }
@@ -39,28 +52,10 @@ public record ScoreSystem(PlayerScore playerOne, PlayerScore playerTwo) {
         int p1Score = playerOne().getScore();
         int p2Score = playerTwo().getScore();
 
-        if ((p1Score > 3 || p2Score > 3) && Math.abs(p1Score - p2Score) == scoreDiff) {
+        if ((p1Score > POINTS_TO_DEUCE || p2Score > POINTS_TO_DEUCE) && Math.abs(p1Score - p2Score) == scoreDiff) {
             return (p1Score > p2Score) ? playerOne().getPlayer() : playerTwo().getPlayer();
         }
 
         return null;
-    }
-
-    private void updatePlayersScore(String player) {
-        if (this.playerOne.getPlayer().equals(player))
-            this.playerOne.increaseScore();
-        else
-            this.playerTwo.increaseScore();
-    }
-
-    private void handleAdvantage() {
-        String pAdvantage = checkAdvantage();
-        if (pAdvantage != null) {
-            if (pAdvantage.equals(playerOne().getPlayer())) {
-                playerTwo.decreaseScore();
-            } else if (pAdvantage.equals(playerTwo().getPlayer())) {
-                playerOne.decreaseScore();
-            }
-        }
     }
 }

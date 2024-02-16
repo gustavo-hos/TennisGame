@@ -5,19 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c82afa27-dc94-4c43-b701-4b88deb5acd2" name="Changes" comment="feat: add Dockerfile to execute the tests inside a container">
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/terato/tennis_game/Game.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/terato/tennis_game/PointCallConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/terato/tennis_game/TennisGame.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/me/terato/tennis_game/exception/InvalidGameInputException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/terato/tennis_game/score/PlayerScore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/terato/tennis_game/score/ScoreSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/terato/tennis_game/score/display/ScoreDisplay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/terato/tennis_game/score/display/StdOutScoreDisplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/terato/TennisGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/terato/tennis_game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/terato/tennis_game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/terato/tennis_game/TennisGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/terato/tennis_game/TennisGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/terato/tennis_game/score/ScoreSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/terato/tennis_game/score/ScoreSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TestTennisGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestTennisGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +33,18 @@
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="TenisGame" type="f1a62948:ProjectNode" />
+                <item name="tennis-game" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="tennis-game" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="tennis-game" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -83,8 +86,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.TennisGame.executor": "Run",
+    "Gradle.Build TenisGame.executor": "Run",
     "Gradle.TenisGame [:TennisGame.main()].executor": "Run",
     "Gradle.TestTennisGame.testTennisGame.executor": "Run",
+    "Gradle.TestTennisGame.testTennisGameWrongInput.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -111,10 +117,12 @@
       <command value="gradle test" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.TennisGame">
+  <component name="RunManager" selected="Gradle.TestTennisGame.testTennisGame">
     <configuration name="TennisGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="me.terato.tennis_game.TennisGame" />
-      <module name="TenisGame.main" />
+      <module name="tennis-game.main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="me.terato.tennis_game.*" />
@@ -149,9 +157,47 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="TestTennisGame.testTennisGameWrongInput" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;TestTennisGame.testTennisGameWrongInput&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="tennis-game" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="tennis-game" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.TestTennisGame.testTennisGame" />
+        <item itemvalue="Gradle.TestTennisGame.testTennisGameWrongInput" />
         <item itemvalue="Application.TennisGame" />
       </list>
     </recent_temporary>

@@ -1,5 +1,7 @@
 package me.terato.tennis_game.score;
 
+import me.terato.tennis_game.exception.InvalidGameInputException;
+
 public record ScoreSystem(PlayerScore playerOne, PlayerScore playerTwo) {
 
     private static final int ADVANTAGE_DIFFERENCE = 1;
@@ -7,7 +9,7 @@ public record ScoreSystem(PlayerScore playerOne, PlayerScore playerTwo) {
     private static final int POINTS_TO_DEUCE = 3;
     private static final int POINTS_TO_WIN = 4;
 
-    public void winPoint(String player) {
+    public void winPoint(String player) throws InvalidGameInputException {
         var pAdvantage = checkAdvantage();
 
         if (this.playerOne.getPlayer().equals(player)) {
@@ -16,11 +18,15 @@ public record ScoreSystem(PlayerScore playerOne, PlayerScore playerTwo) {
             if (pAdvantage != null && pAdvantage.equals(playerTwo().getPlayer()) && playerTwo().getScore() > POINTS_TO_DEUCE)
                 playerTwo.decreaseScore();
 
-        } else {
+        } else if(this.playerTwo.getPlayer().equals(player)) {
             this.playerTwo.increaseScore();
 
             if (pAdvantage != null && pAdvantage.equals(playerOne().getPlayer()) && playerOne().getScore() > POINTS_TO_DEUCE)
                 playerOne.decreaseScore();
+        } else {
+
+            throw new InvalidGameInputException("Give player is not playing this Point. Player: " + player);
+
         }
     }
 

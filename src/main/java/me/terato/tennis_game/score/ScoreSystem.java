@@ -25,10 +25,10 @@ public record ScoreSystem(PlayerScore playerOne, PlayerScore playerTwo) {
     }
 
     public boolean isDeuce() {
-        int p1 = playerOne().getScore();
-        int p2 = playerTwo().getScore();
+        var p1Score = playerOne().getScore();
+        var p2Score = playerTwo().getScore();
 
-        return p1 >= POINTS_TO_DEUCE && p1 == p2;
+        return p1Score >= POINTS_TO_DEUCE && p1Score == p2Score;
     }
 
     public String checkAdvantage() {
@@ -36,12 +36,15 @@ public record ScoreSystem(PlayerScore playerOne, PlayerScore playerTwo) {
     }
 
     public String checkWinner() {
-        if(playerOne().getScore() >= POINTS_TO_DEUCE && playerTwo().getScore() >= POINTS_TO_DEUCE)
+        var p1Score = playerOne().getScore();
+        var p2Score = playerTwo().getScore();
+
+        if(p1Score >= POINTS_TO_DEUCE && p2Score >= POINTS_TO_DEUCE)
             return checkScore(WINNER_DIFFERENCE);
 
-        if (playerOne().getScore() == POINTS_TO_WIN && playerTwo().getScore() < POINTS_TO_DEUCE) {
+        if (p1Score == POINTS_TO_WIN) {
             return playerOne().getPlayer();
-        } else if (playerTwo().getScore() == POINTS_TO_WIN && playerOne().getScore() < POINTS_TO_DEUCE) {
+        } else if (p2Score == POINTS_TO_WIN) {
             return playerTwo().getPlayer();
         }
 
@@ -49,8 +52,8 @@ public record ScoreSystem(PlayerScore playerOne, PlayerScore playerTwo) {
     }
 
     private String checkScore(int scoreDiff) {
-        int p1Score = playerOne().getScore();
-        int p2Score = playerTwo().getScore();
+        var p1Score = playerOne().getScore();
+        var p2Score = playerTwo().getScore();
 
         if ((p1Score > POINTS_TO_DEUCE || p2Score > POINTS_TO_DEUCE) && Math.abs(p1Score - p2Score) == scoreDiff) {
             return (p1Score > p2Score) ? playerOne().getPlayer() : playerTwo().getPlayer();

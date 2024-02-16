@@ -1,30 +1,45 @@
 package me.terato.tennis_game;
 
-import me.terato.tennis_game.scoring.ScoreSystem;
+import me.terato.tennis_game.score.PlayerScore;
+import me.terato.tennis_game.score.ScoreSystem;
+import me.terato.tennis_game.score.display.ScoreDisplay;
+import me.terato.tennis_game.score.display.StdOutScoreDisplay;
 
-public abstract class AbstractGame {
+public class Game {
 
+    private final ScoreDisplay scoreDisplay;
     private final ScoreSystem scoreSystem;
+    private boolean gameEnded;
 
-    public AbstractGame(ScoreSystem scoreSystem) {
-        this.scoreSystem = scoreSystem;
+    public Game() {
+        var p1 = new PlayerScore("A");
+        var p2 = new PlayerScore("B");
+        this.scoreSystem = new ScoreSystem(p1, p2);
+        this.scoreDisplay = new StdOutScoreDisplay(scoreSystem);
+
+    }
+
+    public void playPoint(String input) {
+        scoreSystem.winPoint(input);
+
+        if(scoreSystem.checkWinner() != null) {
+            scoreDisplay.displayWinner();
+            this.gameEnded = true;
+
+            return;
+        }
+
+        scoreDisplay.displayScore();
+
+        if(scoreSystem.isDeuce())
+            scoreDisplay.displayDeuce();
     }
 
     public ScoreSystem getScoreSystem() {
         return scoreSystem;
     }
 
-    public abstract Player checkWinner();
-
-    public void winPoint() {
-
+    public boolean isGameEnded() {
+        return gameEnded;
     }
-
-    public boolean isDeuce() {
-        int serverScore = getScoreSystem().getPlayerOne().getScore();
-        int receiverScore = getScoreSystem().getPlayerTwo().getScore();
-
-        return serverScore >= 3 && serverScore == receiverScore;
-    }
-
 }

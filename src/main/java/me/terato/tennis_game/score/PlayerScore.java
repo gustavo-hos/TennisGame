@@ -1,16 +1,16 @@
-package me.terato.tennis_game;
+package me.terato.tennis_game.score;
 
 public class PlayerScore {
 
-    private final Player player;
+    private final String player;
     private int score;
 
-    public PlayerScore(Player player) {
+    public PlayerScore(String player) {
         this.player = player;
         this.score = 0;
     }
 
-    public Player getPlayer() {
+    public String getPlayer() {
         return player;
     }
 
@@ -24,5 +24,13 @@ public class PlayerScore {
 
     public void decreaseScore() {
         this.score--;
+    }
+
+    @Override
+    public String toString() {
+        return "PlayerScore{" +
+                "player='" + player + '\'' +
+                ", score=" + score +
+                '}';
     }
 }

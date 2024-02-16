@@ -1,15 +1,15 @@
-import me.terato.TennisGame;
+import me.terato.tennis_game.Game;
+import me.terato.tennis_game.TennisGame;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.in;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -33,22 +33,18 @@ public class TestTennisGame {
     public void testTennisGame() throws IllegalAccessException {
         Field[] fields = TestTennisGame.class.getDeclaredFields();
 
-        TennisGame game = new TennisGame();
-
         for (Field f : fields) {
+            var game = new Game();
+
             String input = String.valueOf(Array.get(f.get(null), 0));
             String expected = String.valueOf(Array.get(f.get(null), 1));
 
-            assertThat("Player " + expected + " should win this game.", expected, is(game.play(input)));
+            for (var playerInput : input.toCharArray()) {
+                game.playPoint(String.valueOf(playerInput));
+            }
+
+            assertThat("Player " + expected + " should win this game.", expected, is(game.getScoreSystem().checkWinner()));
         }
     }
 
-    @Test()
-    public void testInvalidGame() {
-        TennisGame game = new TennisGame();
-
-        assertThrows(RuntimeException.class, () -> {
-            game.play("ABABAB");
-        }, "Invalid game should throw RuntimeException");
-    }
 }

@@ -2,36 +2,37 @@ package me.terato.tennis_game.score;
 
 public record ScoreSystem(PlayerScore playerOne, PlayerScore playerTwo) {
 
+    private static final int ADVANTAGE_DIFFERENCE = 1;
+    private static final int WINNER_DIFFERENCE = 2;
+    private static final int POINTS_TO_DEUCE = 3;
+    private static final int POINTS_TO_WIN = 4;
+
     public void winPoint(String player) {
-        var pAdvantage = checkAdvantage();
-
-        if (this.playerOne.getPlayer().equals(player)) {
-            this.playerOne.increaseScore();
-
-            if(pAdvantage != null && pAdvantage.equals(playerTwo.getPlayer()))
-                this.playerTwo.decreaseScore();
-
-        } else {
-            this.playerTwo.increaseScore();
-
-            if(pAdvantage != null && pAdvantage.equals(playerOne.getPlayer()))
-                this.playerOne.decreaseScore();
-        }
+        updatePlayersScore(player);
+        handleAdvantage();
     }
 
     public boolean isDeuce() {
         int serverScore = playerOne().getScore();
         int receiverScore = playerTwo().getScore();
 
-        return serverScore >= 3 && serverScore == receiverScore;
+        return serverScore == POINTS_TO_DEUCE && serverScore == receiverScore;
     }
 
     public String checkAdvantage() {
-        return checkScore(1);
+        return isDeuce() ? checkScore(ADVANTAGE_DIFFERENCE) : null; // To be in advantage, only a one-point difference is necessary.
     }
 
     public String checkWinner() {
-        return checkScore(2);
+        if(isDeuce())
+            return checkScore(WINNER_DIFFERENCE); // To be the winner, only a two-point difference is necessary, in case of deuce.
+
+        if(playerOne().getScore() == POINTS_TO_WIN)
+            return playerOne().getPlayer();
+        else if(playerTwo().getScore() == POINTS_TO_WIN)
+            return playerTwo().getPlayer();
+
+        return null;
     }
 
     private String checkScore(int scoreDiff) {
@@ -45,21 +46,20 @@ public record ScoreSystem(PlayerScore playerOne, PlayerScore playerTwo) {
         return null;
     }
 
-    private void updatePlayerScore(String player) {
-        if (this.playerOne.getPlayer().equals(player)) {
+    private void updatePlayersScore(String player) {
+        if (this.playerOne.getPlayer().equals(player))
             this.playerOne.increaseScore();
-        } else {
+        else
             this.playerTwo.increaseScore();
-        }
     }
 
-    private void handleAdvantage(String player) {
+    private void handleAdvantage() {
         String pAdvantage = checkAdvantage();
         if (pAdvantage != null) {
-            if (pAdvantage.equals(playerOne.getPlayer()) && this.playerTwo.getScore() > 0) {
-                this.playerTwo.decreaseScore();
-            } else if (pAdvantage.equals(playerTwo.getPlayer()) && this.playerOne.getScore() > 0) {
-                this.playerOne.decreaseScore();
+            if (pAdvantage.equals(playerOne().getPlayer())) {
+                playerTwo.decreaseScore();
+            } else if (pAdvantage.equals(playerTwo().getPlayer())) {
+                playerOne.decreaseScore();
             }
         }
     }

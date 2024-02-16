@@ -16,10 +16,13 @@ public class Game {
         var p2 = new PlayerScore("B");
         this.scoreSystem = new ScoreSystem(p1, p2);
         this.scoreDisplay = new StdOutScoreDisplay(scoreSystem);
-
     }
 
     public void playPoint(String input) {
+
+        if(isGameEnded())
+            return;
+
         scoreSystem.winPoint(input);
 
         if(scoreSystem.checkWinner() != null) {

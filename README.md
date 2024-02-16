@@ -1,5 +1,7 @@
 This is an implementation of the Tennis Kata, with the main goal being the creation of a scoring system for a tennis game.
 
+Made with all the cool and powerful TDD tricks, using Java 21, JUnit, and Hamcrest!
+
 ### Rules details:
 
 - A tennis match begins with the umpire doing a coin toss. The player who wins the toss can choose to serve, receive or pick the side from which they want to start the match.
@@ -10,7 +12,14 @@ This is an implementation of the Tennis Kata, with the main goal being the creat
 - If holding the ADVANTAGE, the player who wins the point clinches the game.
 - Should the player holding the ADVANTAGE lose the point, the score reverts to DEUCE.
 
-This was implemented by using TDD with JUnit and Hamcrest, and java 21.
+### Launching the application
+
+To launch the application dockerized (no need to have jdk21 installed or gradle to build the source code) , 
+simply execute `bash run.sh` to configure Docker Compose and initiate OpenJDK instance. 
+Alternatively, manually start Docker Compose with `docker-compose up -d`. Once Gradle completes the build process, its machine will turn down, 
+then execute `docker-compose run -i -t openjdk`.
+
+It can also be built from src by cloning this repo and running `gradle clean build`, but make sure u have gradle configured on your machine.
 
 ---
 
